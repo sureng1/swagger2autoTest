@@ -1,0 +1,4468 @@
+{
+    "basePath": "/platform/api/v1",
+    "definitions": {
+        "data_log_manager.DataCopyRequest": {
+            "properties": {
+                "campaignID": {
+                    "type": "integer"
+                },
+                "dataCategory": {
+                    "type": "string"
+                },
+                "destBehavior": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "sourceBehavior": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "campaignID",
+                "dataCategory",
+                "destBehavior",
+                "region",
+                "sourceBehavior"
+            ],
+            "type": "object"
+        },
+        "data_log_manager.DataCopyResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/data_log_manager.DataCopyUrl"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.DataCopyResult": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "csvUrl": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.DataCopyUrl": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/data_log_manager.DataCopyResult"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.OverviewProcessRequest": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "dataCategory": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "behavior",
+                "campaignID",
+                "dataCategory",
+                "region"
+            ],
+            "type": "object"
+        },
+        "data_log_manager.OverviewProcessResponse": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/data_log_manager.TaskProcessDetail"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.OverviewResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/data_log_manager.TaskProcessDetailCsv"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.OverviewVerifyRequest": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "dataCategory": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "behavior",
+                "campaignID",
+                "dataCategory",
+                "region"
+            ],
+            "type": "object"
+        },
+        "data_log_manager.OverviewVerifyResponse": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/data_log_manager.TaskVerifyDetail"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.TaskProcessDetail": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/data_log_manager.TaskProcessRecord"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.TaskProcessDetailCsv": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/data_log_manager.TaskProcessRecordCsv"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.TaskProcessRecord": {
+            "properties": {
+                "inputs": {
+                    "type": "string"
+                },
+                "processType": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.TaskProcessRecordCsv": {
+            "properties": {
+                "done": {
+                    "type": "integer"
+                },
+                "inputs": {
+                    "type": "string"
+                },
+                "payload": {
+                    "type": "string"
+                },
+                "processType": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.TaskVerifyDetail": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/data_log_manager.TaskVerifyRecord"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.TaskVerifyRecord": {
+            "properties": {
+                "inputs": {
+                    "type": "string"
+                },
+                "processType": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "data_log_manager.UpdateDescriptionRequest": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "dataCategory": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "behavior",
+                "campaignID",
+                "dataCategory",
+                "description",
+                "region"
+            ],
+            "type": "object"
+        },
+        "data_overview_manager.DataLogResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/data_overview_manager.DataLogResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "data_overview_manager.DataLogResult": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/data_overview_manager.UserHistoryLog"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "data_overview_manager.DataOverviewResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/data_overview_manager.DataProgressResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "data_overview_manager.DataProgressResult": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/data_overview_manager.UserDataProgress"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "data_overview_manager.UserDataProgress": {
+            "properties": {
+                "csvUrl": {
+                    "type": "string"
+                },
+                "dataCategory": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "dataCategory"
+            ],
+            "type": "object"
+        },
+        "data_overview_manager.UserHistoryLog": {
+            "properties": {
+                "finishTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "operation": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "data_process_manager.CreateIssueRequest": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "dataCategory": {
+                    "type": "string"
+                },
+                "issueFields": {
+                    "$ref": "#/definitions/data_process_manager.JiraFields"
+                },
+                "operation": {
+                    "type": "string"
+                },
+                "processInput": {
+                    "$ref": "#/definitions/data_process_manager.ProcessInput"
+                },
+                "processType": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "reqID": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "behavior",
+                "campaignID",
+                "dataCategory",
+                "operation",
+                "processInput",
+                "processType",
+                "region",
+                "reqID"
+            ],
+            "type": "object"
+        },
+        "data_process_manager.CustomSettingRequest": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "processOutput": {
+                    "$ref": "#/definitions/entities.ProcessOutput"
+                },
+                "processType": {
+                    "type": "string"
+                },
+                "reqID": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "processOutput",
+                "processType",
+                "reqID",
+                "total"
+            ],
+            "type": "object"
+        },
+        "data_process_manager.JiraFields": {
+            "properties": {
+                "BusinessTeam": {
+                    "type": "string"
+                },
+                "TargetCountry": {
+                    "type": "string"
+                },
+                "assignee": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "labels": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "priority": {
+                    "type": "string"
+                },
+                "reporter": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "TargetCountry",
+                "assignee",
+                "description",
+                "priority",
+                "reporter",
+                "summary"
+            ],
+            "type": "object"
+        },
+        "data_process_manager.ProcessInput": {
+            "properties": {
+                "account": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "item": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "phoneIndex": {
+                    "type": "integer"
+                },
+                "promotion": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "seller": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "shop": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "data_process_manager.TaskCancelRequest": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "dataCategory": {
+                    "type": "string"
+                },
+                "operation": {
+                    "type": "string"
+                },
+                "processType": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "behavior",
+                "campaignID",
+                "dataCategory",
+                "operation",
+                "region"
+            ],
+            "type": "object"
+        },
+        "data_process_manager.TaskProcessRequest": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "dataCategory": {
+                    "type": "string"
+                },
+                "operation": {
+                    "type": "string"
+                },
+                "processInput": {
+                    "$ref": "#/definitions/data_process_manager.ProcessInput"
+                },
+                "processType": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "reqID": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "behavior",
+                "campaignID",
+                "dataCategory",
+                "operation",
+                "processInput",
+                "processType",
+                "region",
+                "reqID"
+            ],
+            "type": "object"
+        },
+        "entities.DataSelect": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "dataCount": {
+                    "type": "string"
+                },
+                "datasource": {
+                    "type": "string"
+                },
+                "strategy": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "entities.Issue": {
+            "properties": {
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "fixAction": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "issueDesc": {
+                    "type": "string"
+                },
+                "issueTime": {
+                    "type": "integer"
+                },
+                "kind": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "rootCause": {
+                    "type": "string"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "roundName": {
+                    "type": "string"
+                },
+                "team": {
+                    "type": "string"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "issueTime",
+                "kind",
+                "roundID",
+                "roundName",
+                "team"
+            ],
+            "type": "object"
+        },
+        "entities.PackageInfo": {
+            "properties": {
+                "campaignID": {
+                    "type": "integer"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "readyId": {
+                    "type": "integer"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "roundName": {
+                    "type": "string"
+                },
+                "task": {
+                    "$ref": "#/definitions/entities.Task"
+                },
+                "taskID": {
+                    "type": "integer"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "campaignID",
+                "roundID",
+                "roundName",
+                "taskID"
+            ],
+            "type": "object"
+        },
+        "entities.PlanResult": {
+            "properties": {
+                "actualPeak": {
+                    "type": "integer"
+                },
+                "behavior": {
+                    "type": "string"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "mandatoryTarget": {
+                    "type": "integer"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "integer"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "stretchTarget": {
+                    "type": "integer"
+                },
+                "testTime": {
+                    "type": "integer"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "actualPeak",
+                "behavior",
+                "mandatoryTarget",
+                "region",
+                "result",
+                "roundID",
+                "stretchTarget",
+                "testTime"
+            ],
+            "type": "object"
+        },
+        "entities.ProcessOutput": {
+            "properties": {
+                "account": {
+                    "type": "string"
+                },
+                "item": {
+                    "type": "string"
+                },
+                "log": {
+                    "type": "string"
+                },
+                "promotion": {
+                    "type": "string"
+                },
+                "seller": {
+                    "type": "string"
+                },
+                "shop": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "entities.Remark": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "entities.Round": {
+            "properties": {
+                "behaviorModels": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "endTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "purposeTesting": {
+                    "type": "string"
+                },
+                "regions": {
+                    "type": "string"
+                },
+                "remarks": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "roundDate": {
+                    "type": "integer"
+                },
+                "roundDuration": {
+                    "type": "integer"
+                },
+                "roundName": {
+                    "type": "string"
+                },
+                "startTime": {
+                    "type": "integer"
+                },
+                "targetDesc": {
+                    "type": "string"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "behaviorModels",
+                "campaignID",
+                "regions",
+                "roundDate",
+                "roundDuration",
+                "roundName"
+            ],
+            "type": "object"
+        },
+        "entities.RoundDetail": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "estimates": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "stressWorkerCapacity": {
+                    "type": "integer"
+                },
+                "stressWorkerTotal": {
+                    "type": "integer"
+                },
+                "stretchTarget": {
+                    "type": "integer"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "behavior",
+                "estimates",
+                "region",
+                "roundID",
+                "stressWorkerCapacity",
+                "stressWorkerTotal",
+                "stretchTarget"
+            ],
+            "type": "object"
+        },
+        "entities.Strategy": {
+            "properties": {
+                "bmLink": {
+                    "type": "string"
+                },
+                "browseMicrosite": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "placeOrder": {
+                    "type": "string"
+                },
+                "poLink": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "bmLink",
+                "browseMicrosite",
+                "campaignID",
+                "placeOrder",
+                "poLink",
+                "region"
+            ],
+            "type": "object"
+        },
+        "entities.StrategyReference": {
+            "properties": {
+                "campaignID": {
+                    "type": "integer"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "referDesc": {
+                    "type": "string"
+                },
+                "referLink": {
+                    "type": "string"
+                },
+                "referName": {
+                    "type": "string"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "campaignID",
+                "referLink",
+                "referName"
+            ],
+            "type": "object"
+        },
+        "entities.Target": {
+            "properties": {
+                "actualsHistory": {
+                    "type": "integer"
+                },
+                "behavior": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "estimates": {
+                    "type": "integer"
+                },
+                "growthRatio": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "stretchRatio": {
+                    "type": "number"
+                },
+                "stretchTarget": {
+                    "type": "integer"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "actualsHistory",
+                "behavior",
+                "campaignID",
+                "estimates",
+                "growthRatio",
+                "region",
+                "stretchRatio",
+                "stretchTarget"
+            ],
+            "type": "object"
+        },
+        "entities.Task": {
+            "properties": {
+                "cancelID": {
+                    "type": "string"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "done": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "payload": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "successful": {
+                    "type": "integer"
+                },
+                "timeoutSeconds": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "status"
+            ],
+            "type": "object"
+        },
+        "models.AddIssueRequestBody": {
+            "properties": {
+                "fixAction": {
+                    "type": "string"
+                },
+                "issueDesc": {
+                    "type": "string"
+                },
+                "issueTime": {
+                    "type": "integer"
+                },
+                "kind": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "rootCause": {
+                    "type": "string"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "roundName": {
+                    "type": "string"
+                },
+                "team": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "issueTime",
+                "kind",
+                "roundID",
+                "roundName",
+                "team"
+            ],
+            "type": "object"
+        },
+        "models.AddStrategyRequest": {
+            "properties": {
+                "bmLink": {
+                    "type": "string"
+                },
+                "browseMicrosite": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "placeOrder": {
+                    "type": "string"
+                },
+                "poLink": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "bmLink",
+                "browseMicrosite",
+                "campaignID",
+                "placeOrder",
+                "poLink",
+                "region"
+            ],
+            "type": "object"
+        },
+        "models.ListIssueResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/models.ListIssueResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "models.ListIssueResult": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/entities.Issue"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "models.ListStrategyReferenceResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/models.ListStrategyReferenceResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "models.ListStrategyReferenceResult": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/entities.StrategyReference"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "models.ListStrategyResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/models.ListStrategyResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "models.ListStrategyResult": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/entities.Strategy"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "models.ListTargetResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/models.ListTargetResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "models.ListTargetResult": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/entities.Target"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "models.SelectIssueResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "items": {
+                        "items": {},
+                        "type": "array"
+                    },
+                    "type": "array"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "models.UpdateIssueRequestBody": {
+            "properties": {
+                "fixAction": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "issueDesc": {
+                    "type": "string"
+                },
+                "issueTime": {
+                    "type": "integer"
+                },
+                "kind": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "rootCause": {
+                    "type": "string"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "roundName": {
+                    "type": "string"
+                },
+                "team": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "issueTime",
+                "kind",
+                "roundID",
+                "roundName",
+                "team"
+            ],
+            "type": "object"
+        },
+        "models.UpsertPlanResultRequest": {
+            "properties": {
+                "actualPeak": {
+                    "type": "integer"
+                },
+                "behavior": {
+                    "type": "string"
+                },
+                "mandatoryTarget": {
+                    "type": "integer"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "integer"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "stretchTarget": {
+                    "type": "integer"
+                },
+                "testTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "actualPeak",
+                "behavior",
+                "mandatoryTarget",
+                "region",
+                "result",
+                "roundID",
+                "stretchTarget",
+                "testTime"
+            ],
+            "type": "object"
+        },
+        "oauth_manager.AuthResult": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "oauth_manager.CallbackReqBody": {
+            "properties": {
+                "state": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "oauth_manager.CallbackResp": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/oauth_manager.AuthResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "oauth_manager.LoginResp": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/oauth_manager.LoginRespBody"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "oauth_manager.LoginRespBody": {
+            "properties": {
+                "clientID": {
+                    "type": "string"
+                },
+                "loginURL": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "oauth_manager.RedirectResp": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/oauth_manager.RedirectRespBody"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "oauth_manager.RedirectRespBody": {
+            "properties": {
+                "state": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "overview_manager.AddTargetRequest": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "targets": {
+                    "items": {
+                        "$ref": "#/definitions/overview_manager.TargetInfo"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "behavior",
+                "campaignID",
+                "targets"
+            ],
+            "type": "object"
+        },
+        "overview_manager.TargetInfo": {
+            "properties": {
+                "actualsHistory": {
+                    "type": "integer"
+                },
+                "estimates": {
+                    "type": "integer"
+                },
+                "growthRatio": {
+                    "type": "number"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "stretchRatio": {
+                    "type": "number"
+                },
+                "stretchTarget": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "actualsHistory",
+                "estimates",
+                "growthRatio",
+                "stretchRatio",
+                "stretchTarget"
+            ],
+            "type": "object"
+        },
+        "plan_package_manager.CheckPackageResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/plan_package_manager.CheckPackageResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_package_manager.CheckPackageResult": {
+            "properties": {
+                "fundamentalDataStatus": {
+                    "type": "boolean"
+                },
+                "roundInfo": {
+                    "$ref": "#/definitions/plan_package_manager.RoundInfo"
+                },
+                "strategyStatus": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "plan_package_manager.GeneratePackageProgressRequest": {
+            "properties": {
+                "taskID": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "taskID"
+            ],
+            "type": "object"
+        },
+        "plan_package_manager.GeneratePackageProgressResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/plan_package_manager.GeneratePackageProgressResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_package_manager.GeneratePackageProgressResult": {
+            "properties": {
+                "results": {
+                    "$ref": "#/definitions/entities.Task"
+                }
+            },
+            "type": "object"
+        },
+        "plan_package_manager.GeneratePackageResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/plan_package_manager.GeneratePackageResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_package_manager.GeneratePackageResult": {
+            "properties": {
+                "taskID": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "plan_package_manager.ListPackageResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/plan_package_manager.ListPackageResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_package_manager.ListPackageResult": {
+            "properties": {
+                "campaignID": {
+                    "type": "integer"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "readyId": {
+                    "type": "integer"
+                },
+                "references": {
+                    "items": {
+                        "$ref": "#/definitions/entities.StrategyReference"
+                    },
+                    "type": "array"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "roundName": {
+                    "type": "string"
+                },
+                "task": {
+                    "$ref": "#/definitions/entities.Task"
+                },
+                "taskID": {
+                    "type": "integer"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "campaignID",
+                "roundID",
+                "roundName",
+                "taskID"
+            ],
+            "type": "object"
+        },
+        "plan_package_manager.PackageGeneralRequest": {
+            "properties": {
+                "campaignID": {
+                    "type": "integer"
+                },
+                "roundID": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "campaignID",
+                "roundID"
+            ],
+            "type": "object"
+        },
+        "plan_package_manager.RoundDetail": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "estimates": {
+                    "type": "integer"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "stressWorkerCapacity": {
+                    "type": "integer"
+                },
+                "stressWorkerTotal": {
+                    "type": "integer"
+                },
+                "stretchTarget": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "plan_package_manager.RoundInfo": {
+            "properties": {
+                "behaviorModels": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "regions": {
+                    "type": "string"
+                },
+                "roundDetail": {
+                    "items": {
+                        "$ref": "#/definitions/plan_package_manager.RoundDetail"
+                    },
+                    "type": "array"
+                },
+                "roundDuration": {
+                    "type": "integer"
+                },
+                "roundName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_process_manager.ListPlanProcessResp": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/plan_process_manager.ListPlanProcessRespData"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_process_manager.ListPlanProcessRespData": {
+            "properties": {
+                "regions": {
+                    "items": {
+                        "$ref": "#/definitions/plan_process_manager.ListPlanProcessRespDataRegion"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "plan_process_manager.ListPlanProcessRespDataRegion": {
+            "properties": {
+                "region": {
+                    "type": "string"
+                },
+                "tasks": {
+                    "items": {
+                        "$ref": "#/definitions/plan_process_manager.ListPlanProcessRespDataRegionTask"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "plan_process_manager.ListPlanProcessRespDataRegionTask": {
+            "properties": {
+                "infos": {
+                    "items": {
+                        "$ref": "#/definitions/plan_process_manager.PlanProcessInfo"
+                    },
+                    "type": "array"
+                },
+                "taskName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_process_manager.PlanProcessExecReqBody": {
+            "properties": {
+                "region": {
+                    "type": "string"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "taskName": {
+                    "enum": [
+                        "SellerLogin",
+                        "ClearCart",
+                        "Validate"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "region",
+                "roundID",
+                "taskName"
+            ],
+            "type": "object"
+        },
+        "plan_process_manager.PlanProcessExecResp": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/plan_process_manager.PlanProcessExecRespData"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_process_manager.PlanProcessExecRespData": {
+            "properties": {
+                "taskID": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "plan_process_manager.PlanProcessInfo": {
+            "properties": {
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "inputUrls": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "task": {
+                    "$ref": "#/definitions/entities.Task"
+                },
+                "taskID": {
+                    "type": "integer"
+                },
+                "taskName": {
+                    "type": "string"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "inputUrls",
+                "region",
+                "roundID",
+                "taskID",
+                "taskName"
+            ],
+            "type": "object"
+        },
+        "plan_report_manager.EditReportReqBody": {
+            "properties": {
+                "dataRemark": {
+                    "type": "string"
+                },
+                "dataSelect": {
+                    "items": {
+                        "$ref": "#/definitions/entities.DataSelect"
+                    },
+                    "type": "array"
+                },
+                "env": {
+                    "type": "string"
+                },
+                "issueRemark": {
+                    "items": {
+                        "$ref": "#/definitions/entities.Remark"
+                    },
+                    "type": "array"
+                },
+                "riskAssess": {
+                    "type": "string"
+                },
+                "roundID": {
+                    "type": "integer"
+                },
+                "spexReport": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "testCase": {
+                    "type": "string"
+                },
+                "testRemark": {
+                    "items": {
+                        "$ref": "#/definitions/entities.Remark"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "roundID"
+            ],
+            "type": "object"
+        },
+        "plan_report_manager.GetReportResp": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/plan_report_manager.RoundReport"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_report_manager.RoundReport": {
+            "properties": {
+                "editableDataRemark": {
+                    "type": "string"
+                },
+                "editableDataSelect": {
+                    "items": {
+                        "$ref": "#/definitions/entities.DataSelect"
+                    },
+                    "type": "array"
+                },
+                "editableEnv": {
+                    "type": "string"
+                },
+                "editableIssueRemark": {
+                    "items": {
+                        "$ref": "#/definitions/entities.Remark"
+                    },
+                    "type": "array"
+                },
+                "editableRiskAssess": {
+                    "type": "string"
+                },
+                "editableSpexReport": {
+                    "type": "string"
+                },
+                "editableSummary": {
+                    "type": "string"
+                },
+                "editableTestCase": {
+                    "type": "string"
+                },
+                "editableTestRemark": {
+                    "items": {
+                        "$ref": "#/definitions/entities.Remark"
+                    },
+                    "type": "array"
+                },
+                "issues": {
+                    "items": {
+                        "$ref": "#/definitions/entities.Issue"
+                    },
+                    "type": "array"
+                },
+                "round": {
+                    "$ref": "#/definitions/entities.Round"
+                },
+                "testObjectives": {
+                    "items": {
+                        "$ref": "#/definitions/entities.RoundDetail"
+                    },
+                    "type": "array"
+                },
+                "testResults": {
+                    "items": {
+                        "$ref": "#/definitions/entities.PlanResult"
+                    },
+                    "type": "array"
+                },
+                "trafficPkg": {
+                    "$ref": "#/definitions/entities.PackageInfo"
+                }
+            },
+            "type": "object"
+        },
+        "plan_report_manager.ShareReportReqBody": {
+            "properties": {
+                "roundID": {
+                    "type": "integer"
+                },
+                "tos": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "roundID",
+                "tos"
+            ],
+            "type": "object"
+        },
+        "plan_result_manager.ListPlanResultResp": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/plan_result_manager.ListPlanResultRespData"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_result_manager.ListPlanResultRespData": {
+            "properties": {
+                "regions": {
+                    "items": {
+                        "$ref": "#/definitions/plan_result_manager.ListPlanResultRespDataRegion"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "plan_result_manager.ListPlanResultRespDataRegion": {
+            "properties": {
+                "behaviors": {
+                    "items": {
+                        "$ref": "#/definitions/plan_result_manager.ListPlanResultRespDataRegionBehavior"
+                    },
+                    "type": "array"
+                },
+                "region": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_result_manager.ListPlanResultRespDataRegionBehavior": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "infos": {
+                    "items": {
+                        "$ref": "#/definitions/entities.PlanResult"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "plan_round_manager.AddRoundDetailRequest": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "estimates": {
+                    "type": "integer"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "stressWorkerCapacity": {
+                    "type": "integer"
+                },
+                "stressWorkerTotal": {
+                    "type": "integer"
+                },
+                "stretchTarget": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "behavior",
+                "estimates",
+                "stressWorkerCapacity",
+                "stressWorkerTotal",
+                "stretchTarget"
+            ],
+            "type": "object"
+        },
+        "plan_round_manager.AddRoundRequest": {
+            "properties": {
+                "behaviorModels": {
+                    "example": "PlaceOrder,BrowseMicrosite",
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "endTime": {
+                    "type": "integer"
+                },
+                "purposeTesting": {
+                    "type": "string"
+                },
+                "regions": {
+                    "example": "SG,VN",
+                    "type": "string"
+                },
+                "remarks": {
+                    "type": "string"
+                },
+                "roundDate": {
+                    "type": "integer"
+                },
+                "roundDetail": {
+                    "items": {
+                        "$ref": "#/definitions/plan_round_manager.AddRoundDetailRequest"
+                    },
+                    "type": "array"
+                },
+                "roundDuration": {
+                    "type": "integer"
+                },
+                "startTime": {
+                    "type": "integer"
+                },
+                "targetDesc": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "behaviorModels",
+                "campaignID",
+                "regions",
+                "roundDate",
+                "roundDetail",
+                "roundDuration"
+            ],
+            "type": "object"
+        },
+        "plan_round_manager.ListRoundDetailResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/plan_round_manager.ListRoundDetailResult"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "plan_round_manager.ListRoundDetailResult": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/plan_round_manager.RoundInfo"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "plan_round_manager.RoundDetail": {
+            "properties": {
+                "behavior": {
+                    "type": "string"
+                },
+                "estimates": {
+                    "type": "integer"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "stressWorkerCapacity": {
+                    "type": "integer"
+                },
+                "stressWorkerTotal": {
+                    "type": "integer"
+                },
+                "stretchTarget": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "plan_round_manager.RoundInfo": {
+            "properties": {
+                "behaviorModels": {
+                    "type": "string"
+                },
+                "campaignID": {
+                    "type": "integer"
+                },
+                "createBy": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "integer"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "endTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "purposeTesting": {
+                    "type": "string"
+                },
+                "regions": {
+                    "type": "string"
+                },
+                "remarks": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "roundDate": {
+                    "type": "integer"
+                },
+                "roundDetail": {
+                    "items": {
+                        "$ref": "#/definitions/plan_round_manager.RoundDetail"
+                    },
+                    "type": "array"
+                },
+                "roundDuration": {
+                    "type": "integer"
+                },
+                "roundName": {
+                    "type": "string"
+                },
+                "startTime": {
+                    "type": "integer"
+                },
+                "targetDesc": {
+                    "type": "string"
+                },
+                "updateBy": {
+                    "type": "string"
+                },
+                "updateTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "behaviorModels",
+                "campaignID",
+                "regions",
+                "roundDate",
+                "roundDuration",
+                "roundName"
+            ],
+            "type": "object"
+        },
+        "plan_round_manager.UpdateRoundRequest": {
+            "properties": {
+                "behaviorModels": {
+                    "example": "PlaceOrder,BrowseMicrosite",
+                    "type": "string"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "endTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "purposeTesting": {
+                    "type": "string"
+                },
+                "regions": {
+                    "example": "SG,VN",
+                    "type": "string"
+                },
+                "remarks": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "roundDate": {
+                    "type": "integer"
+                },
+                "roundDetail": {
+                    "items": {
+                        "$ref": "#/definitions/plan_round_manager.AddRoundDetailRequest"
+                    },
+                    "type": "array"
+                },
+                "roundDuration": {
+                    "type": "integer"
+                },
+                "startTime": {
+                    "type": "integer"
+                },
+                "targetDesc": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "behaviorModels",
+                "id",
+                "regions",
+                "roundDate",
+                "roundDetail",
+                "roundDuration"
+            ],
+            "type": "object"
+        },
+        "portal.ListCampaignInfo": {
+            "properties": {
+                "campaignDesc": {
+                    "type": "string"
+                },
+                "campaignName": {
+                    "type": "string"
+                },
+                "endTime": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "isActive": {
+                    "type": "integer"
+                },
+                "logoURL": {
+                    "type": "string"
+                },
+                "regions": {
+                    "items": {
+                        "$ref": "#/definitions/portal.ListCampaignRegionGroupI18n"
+                    },
+                    "type": "array"
+                },
+                "startTime": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "portal.ListCampaignRegionGroupI18n": {
+            "properties": {
+                "enName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "regions": {
+                    "items": {
+                        "$ref": "#/definitions/portal.ListCampaignRegionI18n"
+                    },
+                    "type": "array"
+                },
+                "zhName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "portal.ListCampaignRegionI18n": {
+            "properties": {
+                "enName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "timezone": {
+                    "type": "string"
+                },
+                "zhName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "portal.ListCampaignResp": {
+            "properties": {
+                "results": {
+                    "items": {
+                        "$ref": "#/definitions/portal.ListCampaignInfo"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "portal.ListCampaignResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "$ref": "#/definitions/portal.ListCampaignResp"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "runtime.ApiResponse": {
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "strategy_manager.AddStrategyReferenceRequest": {
+            "properties": {
+                "campaignID": {
+                    "type": "integer"
+                },
+                "references": {
+                    "items": {
+                        "$ref": "#/definitions/strategy_manager.StrategyReferenceInfo"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "campaignID",
+                "references"
+            ],
+            "type": "object"
+        },
+        "strategy_manager.StrategyReferenceInfo": {
+            "properties": {
+                "referDesc": {
+                    "type": "string"
+                },
+                "referLink": {
+                    "type": "string"
+                },
+                "referName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "referLink",
+                "referName"
+            ],
+            "type": "object"
+        }
+    },
+    "info": {
+        "contact": {
+            "email": "leo.li@shopee.com"
+        },
+        "description": "Backend API for FCST platform",
+        "title": "FCST Platform API",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/data-append": {
+            "post": {
+                "operationId": "ConductDataAppend",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_process_manager.TaskProcessRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "summary": "将当前 csv 文件追加到上一个 round 的 csv 文件中",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-log": {
+            "get": {
+                "operationId": "ListDataLogDetail",
+                "parameters": [
+                    {
+                        "description": "大促 ID",
+                        "in": "query",
+                        "name": "campaignID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "description": "行为模式",
+                        "in": "query",
+                        "name": "behavior",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "地区",
+                        "in": "query",
+                        "name": "region",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "item or account",
+                        "in": "query",
+                        "name": "dataCategory",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "页数",
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "页大小",
+                        "in": "query",
+                        "name": "limit",
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data_overview_manager.DataLogResponse"
+                        }
+                    }
+                },
+                "summary": "显示操作日志详情",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-log/csv-copy": {
+            "get": {
+                "operationId": "GetAvailableBehavior",
+                "parameters": [
+                    {
+                        "description": "大促 ID",
+                        "in": "query",
+                        "name": "campaignID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "description": "行为模式",
+                        "in": "query",
+                        "name": "behavior",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "地区",
+                        "in": "query",
+                        "name": "region",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "item or account",
+                        "in": "query",
+                        "name": "dataCategory",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data_log_manager.DataCopyResponse"
+                        }
+                    }
+                },
+                "summary": "查询可用的behavior",
+                "tags": [
+                    "FundamentData"
+                ]
+            },
+            "post": {
+                "operationId": "ConductDataCopy",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_log_manager.DataCopyRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "summary": "执行数据复制操作",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-log/update-description": {
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "UpdateDescription",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_log_manager.UpdateDescriptionRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "更新 Description",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-overview": {
+            "get": {
+                "operationId": "ConductDataOverview",
+                "parameters": [
+                    {
+                        "description": "大促 ID",
+                        "in": "query",
+                        "name": "campaignID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "description": "行为模式",
+                        "in": "query",
+                        "name": "behavior",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "地区",
+                        "in": "query",
+                        "name": "region",
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data_overview_manager.DataOverviewResponse"
+                        }
+                    }
+                },
+                "summary": "进行数据overview查询",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-process": {
+            "delete": {
+                "operationId": "CancelDataProcess",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_process_manager.TaskCancelRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "summary": "中断数据处理任务",
+                "tags": [
+                    "FundamentData"
+                ]
+            },
+            "get": {
+                "operationId": "ListOverview",
+                "parameters": [
+                    {
+                        "description": "ID",
+                        "in": "query",
+                        "name": "ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data_log_manager.OverviewResponse"
+                        }
+                    }
+                },
+                "summary": "get process操作详情",
+                "tags": [
+                    "FundamentData"
+                ]
+            },
+            "post": {
+                "operationId": "ConductDataProcess",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_process_manager.TaskProcessRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "summary": "进行数据处理",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-process/create-ticket": {
+            "post": {
+                "operationId": "CreateJiraIssue",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_process_manager.CreateIssueRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "summary": "创建jira工单",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-process/custom-setting": {
+            "post": {
+                "operationId": "CustomSetting",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_process_manager.CustomSettingRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "summary": "自定义输入输出",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-process/manual-done": {
+            "post": {
+                "operationId": "ManualSetDone",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_process_manager.TaskCancelRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "summary": "手动设置任务状态为DONE",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-process/persist-input": {
+            "post": {
+                "operationId": "PersistProcessInput",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_process_manager.TaskProcessRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "summary": "将 process 的输入持久化",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-process/phone-index": {
+            "post": {
+                "operationId": "PhoneIndexProcess",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_process_manager.TaskProcessRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "summary": "处理 PhoneIndex",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-process/process-detail": {
+            "post": {
+                "operationId": "ListOverviewProcess",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_log_manager.OverviewProcessRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data_log_manager.OverviewProcessResponse"
+                        }
+                    }
+                },
+                "summary": "显示process操作详情",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/data-process/verify-detail": {
+            "post": {
+                "operationId": "ListOverviewVerify",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/data_log_manager.OverviewVerifyRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/data_log_manager.OverviewVerifyResponse"
+                        }
+                    }
+                },
+                "summary": "显示操作详情",
+                "tags": [
+                    "FundamentData"
+                ]
+            }
+        },
+        "/issue": {
+            "delete": {
+                "operationId": "DeleteIssue",
+                "parameters": [
+                    {
+                        "description": "记录 ID",
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "删除 Issue",
+                "tags": [
+                    "Issue"
+                ]
+            },
+            "get": {
+                "operationId": "ListIssue",
+                "parameters": [
+                    {
+                        "description": "按 ID 查询",
+                        "in": "query",
+                        "name": "id",
+                        "type": "string"
+                    },
+                    {
+                        "description": "页数",
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "页大小",
+                        "in": "query",
+                        "name": "limit",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "字段 IssueTime 小于筛选",
+                        "in": "query",
+                        "name": "ltIssueTime",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "字段 IssueTime 大于筛选",
+                        "in": "query",
+                        "name": "gtIssueTime",
+                        "type": "integer"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "description": "字段 Kind 精确匹配",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "kind",
+                        "type": "array"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "description": "字段 Priority 精确匹配",
+                        "in": "query",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "name": "priority",
+                        "type": "array"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "description": "字段 RoundID 精确匹配",
+                        "in": "query",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "name": "roundID",
+                        "type": "array"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "description": "字段 RoundName 精确匹配",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "roundName",
+                        "type": "array"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "description": "字段 Team 精确匹配",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "team",
+                        "type": "array"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "description": "所有排序字段 (默认升序)",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "sort",
+                        "type": "array"
+                    },
+                    {
+                        "collectionFormat": "multi",
+                        "description": "所有排序字段中的降序排序字段",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "desc",
+                        "type": "array"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ListIssueResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "条件查询 Issue",
+                "tags": [
+                    "Issue"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "AddIssue",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.AddIssueRequestBody"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "新增 Issue",
+                "tags": [
+                    "Issue"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "UpdateIssue",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpdateIssueRequestBody"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "更新 Issue",
+                "tags": [
+                    "Issue"
+                ]
+            }
+        },
+        "/issue/select": {
+            "get": {
+                "operationId": "SelectIssue",
+                "parameters": [
+                    {
+                        "collectionFormat": "multi",
+                        "description": "字段名",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "field",
+                        "type": "array"
+                    },
+                    {
+                        "description": "页数",
+                        "in": "query",
+                        "name": "distinct",
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SelectIssueResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "枚举/列举 Issue 字段值",
+                "tags": [
+                    "Issue"
+                ]
+            }
+        },
+        "/oauth/google": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "LoginCallback",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/oauth_manager.CallbackReqBody"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/oauth_manager.CallbackResp"
+                        }
+                    }
+                },
+                "summary": "处理 OAuth 回调",
+                "tags": [
+                    "GoogleOAuth"
+                ]
+            }
+        },
+        "/oauth/google-redirect": {
+            "get": {
+                "operationId": "LoginRedirect",
+                "parameters": [
+                    {
+                        "description": "State",
+                        "in": "query",
+                        "name": "state",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Auth code",
+                        "in": "query",
+                        "name": "code",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/oauth_manager.RedirectResp"
+                        }
+                    }
+                },
+                "summary": "处理 OAuth 重定向",
+                "tags": [
+                    "GoogleOAuth"
+                ]
+            }
+        },
+        "/oauth/login": {
+            "get": {
+                "operationId": "Login",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/oauth_manager.LoginResp"
+                        }
+                    }
+                },
+                "summary": "处理用户登录",
+                "tags": [
+                    "GoogleOAuth"
+                ]
+            }
+        },
+        "/oauth/logout": {
+            "get": {
+                "operationId": "Logout",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "处理登出",
+                "tags": [
+                    "GoogleOAuth"
+                ]
+            }
+        },
+        "/ops-campaign": {
+            "get": {
+                "operationId": "ListCampaigns",
+                "parameters": [
+                    {
+                        "description": "按 ID 查询",
+                        "in": "query",
+                        "name": "id",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "页数",
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "页大小",
+                        "in": "query",
+                        "name": "limit",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "字段 EndTime 小于筛选",
+                        "in": "query",
+                        "name": "ltEndTime",
+                        "type": "string"
+                    },
+                    {
+                        "description": "字段 EndTime 大于筛选",
+                        "in": "query",
+                        "name": "gtEndTime",
+                        "type": "string"
+                    },
+                    {
+                        "description": "字段 IsActive 精确匹配",
+                        "in": "query",
+                        "name": "isActive",
+                        "type": "string"
+                    },
+                    {
+                        "description": "字段 StartTime 小于筛选",
+                        "in": "query",
+                        "name": "ltStartTime",
+                        "type": "string"
+                    },
+                    {
+                        "description": "字段 StartTime 大于筛选",
+                        "in": "query",
+                        "name": "gtStartTime",
+                        "type": "string"
+                    },
+                    {
+                        "description": "所有排序字段 (默认升序)",
+                        "in": "query",
+                        "name": "sort",
+                        "type": "string"
+                    },
+                    {
+                        "description": "所有排序字段中的降序排序字段",
+                        "in": "query",
+                        "name": "desc",
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/portal.ListCampaignResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "条件查询 OpsCampaign",
+                "tags": [
+                    "Campaign"
+                ]
+            }
+        },
+        "/package": {
+            "get": {
+                "operationId": "ListPackage",
+                "parameters": [
+                    {
+                        "description": "字段 CampaignID 精确匹配",
+                        "in": "query",
+                        "name": "campaignID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "description": "字段 RoundID 精确匹配",
+                        "in": "query",
+                        "name": "roundID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/plan_package_manager.ListPackageResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "条件查询 Package",
+                "tags": [
+                    "Package"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "GeneratePackage",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/plan_package_manager.PackageGeneralRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/plan_package_manager.GeneratePackageResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "生成 Package",
+                "tags": [
+                    "Package"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "UpdatePackage",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/plan_package_manager.GeneratePackageProgressRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "更新 Package",
+                "tags": [
+                    "Package"
+                ]
+            }
+        },
+        "/package-check": {
+            "get": {
+                "operationId": "CheckPackage",
+                "parameters": [
+                    {
+                        "description": "字段 CampaignID 精确匹配",
+                        "in": "query",
+                        "name": "campaignID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "description": "字段 RoundID 精确匹配",
+                        "in": "query",
+                        "name": "roundID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/plan_package_manager.CheckPackageResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "查询 Package 生成前置条件",
+                "tags": [
+                    "Package"
+                ]
+            }
+        },
+        "/package-progress": {
+            "get": {
+                "operationId": "GeneratePackageProgress",
+                "parameters": [
+                    {
+                        "description": "字段 taskID 精确匹配",
+                        "in": "query",
+                        "name": "taskID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/plan_package_manager.GeneratePackageProgressResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "查询生成 Package 进度",
+                "tags": [
+                    "Package"
+                ]
+            }
+        },
+        "/plan-process": {
+            "get": {
+                "operationId": "ListPlanProcess",
+                "parameters": [
+                    {
+                        "description": "Round ID",
+                        "in": "query",
+                        "name": "roundID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/plan_process_manager.ListPlanProcessResp"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "查询数据处理状态",
+                "tags": [
+                    "PlanProcess"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "PlanProcessExec",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/plan_process_manager.PlanProcessExecReqBody"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/plan_process_manager.PlanProcessExecResp"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "执行数据处理",
+                "tags": [
+                    "PlanProcess"
+                ]
+            }
+        },
+        "/plan-process/{taskID}": {
+            "delete": {
+                "operationId": "PlanProcessCancel",
+                "parameters": [
+                    {
+                        "description": "任务 ID",
+                        "in": "path",
+                        "name": "taskID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "取消数据处理",
+                "tags": [
+                    "PlanProcess"
+                ]
+            }
+        },
+        "/plan-report": {
+            "get": {
+                "operationId": "GetReport",
+                "parameters": [
+                    {
+                        "description": "Round ID",
+                        "in": "query",
+                        "name": "roundID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/plan_report_manager.GetReportResp"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "获取测试报告",
+                "tags": [
+                    "PlanReport"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "ShareReport",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/plan_report_manager.ShareReportReqBody"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "分享测试报告",
+                "tags": [
+                    "PlanReport"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "EditReport",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/plan_report_manager.EditReportReqBody"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "编辑测试报告",
+                "tags": [
+                    "PlanReport"
+                ]
+            }
+        },
+        "/plan-result": {
+            "get": {
+                "operationId": "ListPlanResult",
+                "parameters": [
+                    {
+                        "description": "Round ID",
+                        "in": "query",
+                        "name": "roundID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/plan_result_manager.ListPlanResultResp"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "查询测试结果",
+                "tags": [
+                    "PlanResult"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "UpsertPlanResult",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.UpsertPlanResultRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "编辑 PlanResult",
+                "tags": [
+                    "PlanResult"
+                ]
+            }
+        },
+        "/round-detail": {
+            "delete": {
+                "operationId": "DeleteRoundDetail",
+                "parameters": [
+                    {
+                        "description": "记录 ID",
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "删除 RoundDetail",
+                "tags": [
+                    "RoundDetail"
+                ]
+            },
+            "get": {
+                "operationId": "ListRoundDetail",
+                "parameters": [
+                    {
+                        "description": "按 ID 查询",
+                        "in": "query",
+                        "name": "id",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "页数",
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "页大小",
+                        "in": "query",
+                        "name": "limit",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "字段 CampaignID 精确匹配",
+                        "in": "query",
+                        "name": "campaignID",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "字段 RoundName 精确匹配",
+                        "in": "query",
+                        "name": "roundName",
+                        "type": "string"
+                    },
+                    {
+                        "description": "所有排序字段 (默认升序)",
+                        "in": "query",
+                        "name": "sort",
+                        "type": "string"
+                    },
+                    {
+                        "description": "所有排序字段中的降序排序字段",
+                        "in": "query",
+                        "name": "desc",
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/plan_round_manager.ListRoundDetailResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "条件查询 RoundDetail",
+                "tags": [
+                    "RoundDetail"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "AddRoundDetail",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/plan_round_manager.AddRoundRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "新增 RoundDetail",
+                "tags": [
+                    "RoundDetail"
+                ]
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "UpdateRoundDetail",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/plan_round_manager.UpdateRoundRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "更新 RoundDetail",
+                "tags": [
+                    "RoundDetail"
+                ]
+            }
+        },
+        "/strategy": {
+            "get": {
+                "operationId": "ListStrategy",
+                "parameters": [
+                    {
+                        "description": "字段 CampaignID 精确匹配",
+                        "in": "query",
+                        "name": "campaignID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "description": "字段 Region 精确匹配",
+                        "in": "query",
+                        "name": "region",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ListStrategyResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "条件查询 Strategy",
+                "tags": [
+                    "Strategy"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "AddStrategy",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.AddStrategyRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "新增/修改 Strategy",
+                "tags": [
+                    "Strategy"
+                ]
+            }
+        },
+        "/strategy-reference": {
+            "get": {
+                "operationId": "ListStrategyReference",
+                "parameters": [
+                    {
+                        "description": "字段 CampaignID 精确匹配",
+                        "in": "query",
+                        "name": "campaignID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ListStrategyReferenceResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "条件查询 StrategyReference",
+                "tags": [
+                    "StrategyReference"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "AddStrategyReference",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/strategy_manager.AddStrategyReferenceRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "新增/修改 StrategyReference",
+                "tags": [
+                    "StrategyReference"
+                ]
+            }
+        },
+        "/target": {
+            "get": {
+                "operationId": "ListTarget",
+                "parameters": [
+                    {
+                        "description": "字段 CampaignID 精确匹配",
+                        "in": "query",
+                        "name": "campaignID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "description": "字段 Behavior 精确匹配",
+                        "in": "query",
+                        "name": "behavior",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ListTargetResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "条件查询 Target",
+                "tags": [
+                    "Target"
+                ]
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "operationId": "AddTarget",
+                "parameters": [
+                    {
+                        "description": "请求体",
+                        "in": "body",
+                        "name": "req",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/overview_manager.AddTargetRequest"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/runtime.ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BasicAuth": []
+                    }
+                ],
+                "summary": "新增/修改 Target",
+                "tags": [
+                    "Target"
+                ]
+            }
+        }
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
+        }
+    },
+    "swagger": "2.0",
+    "tags": [
+        {
+            "description": "Google OAuth 认证鉴权",
+            "name": "GoogleOAuth"
+        },
+        {
+            "description": "大促信息",
+            "name": "Campaign"
+        },
+        {
+            "description": "压测目标 (overview)",
+            "name": "Target"
+        },
+        {
+            "description": "压测策略",
+            "name": "Strategy"
+        },
+        {
+            "description": "压测策略引用文档",
+            "name": "StrategyReference"
+        },
+        {
+            "description": "FCST plan 数据处理",
+            "name": "PlanProcess"
+        },
+        {
+            "description": "FCST plan 测试结果",
+            "name": "PlanResult"
+        },
+        {
+            "description": "FCST plan 测试报告",
+            "name": "PlanReport"
+        },
+        {
+            "description": "问题跟踪",
+            "name": "Issue"
+        }
+    ]
+}
