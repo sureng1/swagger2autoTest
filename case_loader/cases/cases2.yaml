@@ -1,0 +1,33 @@
+getTask2: #get task api name, 可以自己定义
+  method: "GET" # http的方法命，必须符合MIEE?标准
+  relative_path: "v1/getTask2"
+  parameters:
+    processInput:
+      default: "{item:-1}"
+    processInput.phoneIndex.cwhi:
+      default: 1
+      test_cases:
+        case200:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 8
+        case300:
+          - 1
+#
+#`method`:
+#  `query`:
+#     `paramters`
+#   `body`:
+#      `paramters`:
+#         `name`:
+#            default:123
+#            cases:
+#              - case1
+#              - case2
+#
+#rule: 如果参数的default已经被定义过了，不能重复定义default
+#ok,notok
+#"读yaml是不是顺序的，如果不是的话，会不会出现，顶层case的default覆盖掉低层case的default或者case。"
