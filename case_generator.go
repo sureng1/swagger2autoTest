@@ -1,19 +1,21 @@
 package main
 
 import (
+	"gopkg.in/yaml.v2"
 	"log"
+	"os"
 	"producerPy/case_loader"
 	"producerPy/parser"
 	"strings"
 )
 
 func main() {
-	testCases := case_loader.ReadCasesFiles()
+	testCases := case_loader.ReadCasesFiles("case_loader/cases")
 	apiList := parser.Parse("parser/fcst-platform.json")
 	for name, testCase := range testCases {
 		targetApi := FindApi(apiList, testCase)
 		if targetApi == nil {
-			panic(`[error] can not find the api you defied, name:` + name + `method:` + testCase.Method)
+			panic(`[error] can not find the api you defied, name: ` + name + ` method: ` + testCase.Method)
 		}
 		err := generateRequestCase(targetApi, testCase)
 		if err != nil {
@@ -31,62 +33,81 @@ func FindApi(apiList []*parser.API, testCase *case_loader.TestCase) *parser.API 
 	return nil
 }
 
-func generateRequestCase(api *parser.API, testCase *case_loader.TestCase) error {
+type Request struct {
+	API API `yaml:"api"`
+	Case string `yaml:"case"`
+	Body struct{} `yaml:"body"`
+	Level string `yaml:"level"`
+	UrlInput string `yaml:"url_input"`
+	Params string `yaml:"params"`
+	StatusCode int `yaml:"status_code"`
+	BusinessCode int `yaml:"business_code"`
+	Reason string `yaml:"reason"`
+}
+
+type API struct {
+	AliasName string `yaml:"alias_name"`
+	Method string `yaml:"method"`
+	SubUrl string `yaml:"sub_url"`
+}
+
+func api2Request(api *parser.API, testCase *case_loader.Case) Request {
+	req := Request{}
+	req.API.SubUrl = api.RelativePath
+	req.API.Method = api.Method
+	req.API.AliasName = "todo is what?"
+
+	req.Body = struct{}{}
+	req.BusinessCode = testCase.BusinessCode
+	req.Case = testCase.CaseName
+	req.Level = testCase.Level
+
+	req.Reason = "ok(todo)"
+	req.StatusCode = testCase.StatusCode
+
+
+	req.Params = api.Params
+	allProp := map[string]parser.Prop
 	for _, param := range api.Params {
-		for name, value := range testCase.Parameters {
-			setProp(param.Props, name, value.Default)
+		for name, prop := range param.Props
+		allProp param.Props
+	}
+	// todo
+	//req.UrlInput = 1
+	//req.API.SubUrl = 1
+
+	return req
+}
+
+func generateRequestCase(api *parser.API, testCaseRef *case_loader.TestCase) error {
+	for _, param := range api.Params {
+		for param2Test, paramCase := range testCaseRef.Parameters {
+			parser.SetProp(param.Props, param2Test, paramCase.Default)
 		}
 	}
 
+	templateList := make([]Request, 0)
 	for _, param := range api.Params {
-		for propNameTestCase, paramTestCase := range testCase.Parameters {
-			for caseName, caseValue := range paramTestCase.TestCases {
-				parent := findPropParent(param.Props, propNameTestCase)
-				propName := getPropName(propNameTestCase)
-				j
-				defauleValue := parent.Props[propName]
-				parent.Props[propName] = parser.NewOverwrite(caseValue)
-				generate(api, caseName)
-				parent.Props[propName] = defauleValue
+		for param2Test, paramCase := range testCaseRef.Parameters {
+			for _, testCase := range paramCase.TestCases {
+				for _, testValue := range testCase.ValueList {
+					old, _ := parser.SetPropAndGetOld(param.Props, param2Test, testValue)
+					req := api2Request(api, testCase)
+					templateList = append(templateList, req)
+					parser.SetProp(param.Props, param2Test, old)
+				}
 			}
 		}
 	}
-}
 
-func setProp(prop parser.Prop, key string, value interface{}) bool {
-	_, ok := setPropAndGetOld(prop, key, value)
-	return ok
-}
-
-func setPropAndGetOld(prop parser.Prop, key string, value interface{}) (parser.Prop, bool) {
-	if value == nil {
-		return nil, false
+	b, err := yaml.Marshal(templateList)
+	if err != nil {
+		return err
 	}
-	parent := findPropParent(prop, key)
-	propName := getPropName(key)
-	old := parent.Props[propName]
-	parent.Props[propName] = parser.NewOverwrite(value)
-	return old, true
-}
-
-func findPropParent(prop parser.Prop, key string) *parser.Object {
-	props := strings.Split(key, ".")
-	// find prop to modify
-	temp := prop
-	var exists bool
-	for i, propName := range props {
-		if i == len(props)-1 {
-			break
-		}
-		temp, exists = temp.(*parser.Object).Props[propName]
-		if !exists {
-			return nil
-		}
+	f, err := os.Create("cases_generated/" + strings.ReplaceAll(api.RelativePath, "/", "_") +".yaml")
+	if err != nil {
+		return err
 	}
-	return temp.(*parser.Object)
-}
-
-func getPropName(key string) string { // a.b.c
-	props := strings.Split(key, ".")
-	return props[len(props)-1]
+	_, err = f.Write(b)
+	return err
 }

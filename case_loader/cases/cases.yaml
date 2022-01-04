@@ -5,17 +5,15 @@ getTask: #get task api name, 可以自己定义
     processInput:
       default: "{item:-1}"
     processInput.phoneIndex.cwhi:
-      default: 1
+      default_value: 1
       test_cases:
-        case200:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 8
-        case300:
-          - 1
+        - case_name: "case200"
+          status_code: 200
+          business_code: 2002
+          level: "P1"
+          value_list:
+            - 1
+            - 2
 #
 #`method`:
 #  `query`:

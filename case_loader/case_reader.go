@@ -18,12 +18,19 @@ type TestCase struct {
 }
 
 type ParameterCase struct {
-	Default   interface{}              `yaml:"default"`
-	TestCases map[string][]interface{} `yaml:"test_cases"`
+	Default   interface{} `yaml:"default_value"`
+	TestCases []*Case     `yaml:"test_cases"`
 }
 
-func ReadCasesFiles() TestCases {
-	dir := "cases"
+type Case struct {
+	CaseName     string        `yaml:"case_name"`
+	StatusCode   int           `yaml:"status_code"`
+	BusinessCode int           `yaml:"business_code"`
+	Level        string        `yaml:"level"`
+	ValueList    []interface{} `yaml:"value_list"`
+}
+
+func ReadCasesFiles(dir string) TestCases {
 	cases, err := os.ReadDir(dir)
 	if err != nil {
 		panic(err)

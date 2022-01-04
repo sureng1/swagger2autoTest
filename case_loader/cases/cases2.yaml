@@ -1,21 +1,21 @@
-getTask2: #get task api name, 可以自己定义
-  method: "GET" # http的方法命，必须符合MIEE?标准
-  relative_path: "v1/getTask2"
-  parameters:
-    processInput:
-      default: "{item:-1}"
-    processInput.phoneIndex.cwhi:
-      default: 1
-      test_cases:
-        case200:
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 8
-        case300:
-          - 1
+#getTask2: #get task api name, 可以自己定义
+#  method: "GET" # http的方法命，必须符合MIEE?标准
+#  relative_path: "v1/getTask2"
+#  parameters:
+#    processInput:
+#      default: "{item:-1}"
+#    processInput.phoneIndex.cwhi:
+#      default: 1
+#      test_cases:
+#        case200:
+#          - 1
+#          - 2
+#          - 3
+#          - 4
+#          - 5
+#          - 8
+#        case300:
+#          - 1
 #
 #`method`:
 #  `query`:
