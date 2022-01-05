@@ -1,0 +1,225 @@
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 0
+  case: 'case-2: appid-合法参数-20002'
+  level: P1
+  params: {}
+  reason: ok
+  status_code: 200
+  url_input:
+    appid: 20002
+    domainId: 187
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-3: appid-非法参数-0'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 0
+    domainId: 187
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-4: appid-非法参数-1111'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 1111
+    domainId: 187
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-5: appid-非法参数--223'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: -223
+    domainId: 187
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-6: appid-非法参数-2147483647'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 2147483647
+    domainId: 187
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-7: appid-非法参数-3.3'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 3.3
+    domainId: 187
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-8: appid-非法参数-ab'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: ab
+    domainId: 187
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-9: appid-非法参数-'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: ''
+    domainId: 187
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 0
+  case: 'case-10: domainId-合法参数-187'
+  level: P1
+  params: {}
+  reason: ok
+  status_code: 200
+  url_input:
+    appid: 20002
+    domainId: 187
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-11: domainId-非法参数-1'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 20002
+    domainId: 1
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-12: domainId-非法参数-0'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 20002
+    domainId: 0
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-13: domainId-非法参数--11'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 20002
+    domainId: -11
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-14: domainId-非法参数-12345'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 20002
+    domainId: 12345
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-15: domainId-非法参数-0.9'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 20002
+    domainId: 0.9
+    x-request-id: ''
+- api:
+    alias_name: get_access_ip
+    method: GET
+    sub_url: console/api/v1/app/${appid}/domain/${domainId}/access/referer
+  body: {}
+  business_code: 10011
+  case: 'case-16: domainId-非法参数-'
+  level: P2
+  params: {}
+  reason: failed
+  status_code: 200
+  url_input:
+    appid: 20002
+    domainId: ''
+    x-request-id: ''

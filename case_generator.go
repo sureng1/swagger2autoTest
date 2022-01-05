@@ -1,12 +1,15 @@
 package main
 
 import (
-	"gopkg.in/yaml.v2"
+	"encoding/json"
 	"log"
+	"net/url"
 	"os"
 	"producerPy/case_loader"
 	"producerPy/parser"
 	"strings"
+
+	"gopkg.in/yaml.v2"
 )
 
 func main() {
@@ -34,21 +37,21 @@ func FindApi(apiList []*parser.API, testCase *case_loader.TestCase) *parser.API 
 }
 
 type Request struct {
-	API API `yaml:"api"`
-	Case string `yaml:"case"`
-	Body struct{} `yaml:"body"`
-	Level string `yaml:"level"`
-	UrlInput string `yaml:"url_input"`
-	Params string `yaml:"params"`
-	StatusCode int `yaml:"status_code"`
-	BusinessCode int `yaml:"business_code"`
-	Reason string `yaml:"reason"`
+	API          API      `yaml:"api"`
+	Case         string   `yaml:"case"`
+	Body         struct{} `yaml:"body"`
+	Level        string   `yaml:"level"`
+	UrlInput     string   `yaml:"url_input"`
+	Params       string   `yaml:"params"`
+	StatusCode   int      `yaml:"status_code"`
+	BusinessCode int      `yaml:"business_code"`
+	Reason       string   `yaml:"reason"`
 }
 
 type API struct {
 	AliasName string `yaml:"alias_name"`
-	Method string `yaml:"method"`
-	SubUrl string `yaml:"sub_url"`
+	Method    string `yaml:"method"`
+	SubUrl    string `yaml:"sub_url"`
 }
 
 func api2Request(api *parser.API, testCase *case_loader.Case) Request {
@@ -65,16 +68,38 @@ func api2Request(api *parser.API, testCase *case_loader.Case) Request {
 	req.Reason = "ok(todo)"
 	req.StatusCode = testCase.StatusCode
 
-
-	req.Params = api.Params
-	allProp := map[string]parser.Prop
-	for _, param := range api.Params {
-		for name, prop := range param.Props
-		allProp param.Props
+	toString := func(m interface{}) string {
+		b, err := json.Marshal(m)
+		if err != nil {
+			log.Print(m)
+			panic(err)
+		}
+		return string(b)
 	}
-	// todo
-	//req.UrlInput = 1
-	//req.API.SubUrl = 1
+
+	body := map[string]interface{}{}
+	path := map[string]interface{}{}
+	query := url.Values{}
+	for _, param := range api.Params {
+		switch param.In {
+		case "body":
+			body[param.Name] = param.Props
+		case "path":
+			path[param.Name] = param.Props
+		case "query":
+			query.Add(param.Name, toString(param.Props))
+		default:
+			panic("type unexpected" + param.In)
+		}
+	}
+
+	req.Params = toString(body)
+	req.UrlInput = toString(path)
+
+	u := url.URL{}
+	u.Path = api.RelativePath
+	u.RawQuery = query.Encode()
+	req.API.SubUrl = u.String()
 
 	return req
 }
@@ -104,7 +129,7 @@ func generateRequestCase(api *parser.API, testCaseRef *case_loader.TestCase) err
 	if err != nil {
 		return err
 	}
-	f, err := os.Create("cases_generated/" + strings.ReplaceAll(api.RelativePath, "/", "_") +".yaml")
+	f, err := os.Create("cases_generated/" + strings.ReplaceAll(api.RelativePath, "/", "_") + ".yaml")
 	if err != nil {
 		return err
 	}

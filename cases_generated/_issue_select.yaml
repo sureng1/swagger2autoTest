@@ -1,0 +1,48 @@
+- api:
+    alias_name: todo is what?
+    method: GET
+    sub_url: /issue/select?distinct=false&field=null
+  case: case200
+  body: {}
+  level: P1
+  url_input: '{}'
+  params: '{}'
+  status_code: 200
+  business_code: 2002
+  reason: ok(todo)
+- api:
+    alias_name: todo is what?
+    method: GET
+    sub_url: /issue/select?distinct=false&field=null
+  case: case200
+  body: {}
+  level: P1
+  url_input: '{}'
+  params: '{}'
+  status_code: 200
+  business_code: 2002
+  reason: ok(todo)
+- api:
+    alias_name: todo is what?
+    method: GET
+    sub_url: /issue/select?distinct=false&field=null
+  case: case200
+  body: {}
+  level: P1
+  url_input: '{}'
+  params: '{}'
+  status_code: 200
+  business_code: 2002
+  reason: ok(todo)
+- api:
+    alias_name: todo is what?
+    method: GET
+    sub_url: /issue/select?distinct=false&field=null
+  case: case200
+  body: {}
+  level: P1
+  url_input: '{}'
+  params: '{}'
+  status_code: 200
+  business_code: 2002
+  reason: ok(todo)
