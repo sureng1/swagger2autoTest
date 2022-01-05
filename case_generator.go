@@ -9,8 +9,13 @@ import (
 	"producerPy/parser"
 	"strings"
 
+	"go.uber.org/zap"
 	"gopkg.in/yaml.v2"
 )
+
+func init() {
+	zap.ReplaceGlobals(zap.NewExample())
+}
 
 func main() {
 	testCases := case_loader.ReadCasesFiles("case_loader/cases")
@@ -112,11 +117,14 @@ func generateRequestCase(api *parser.API, testCaseRef *case_loader.TestCase) err
 	}
 
 	templateList := make([]Request, 0)
-	for _, param := range api.Params {
-		for param2Test, paramCase := range testCaseRef.Parameters {
-			for _, testCase := range paramCase.TestCases {
-				for _, testValue := range testCase.ValueList {
-					old, _ := parser.SetPropAndGetOld(param.Props, param2Test, testValue)
+	for param2Test, paramCase := range testCaseRef.Parameters {
+		for _, testCase := range paramCase.TestCases {
+			for _, testValue := range testCase.ValueList {
+				for _, param := range api.Params {
+					old, err := parser.SetPropAndGetOld(param.Props, param2Test, testValue)
+					if err != nil {
+						continue
+					}
 					req := api2Request(api, testCase)
 					templateList = append(templateList, req)
 					parser.SetProp(param.Props, param2Test, old)
