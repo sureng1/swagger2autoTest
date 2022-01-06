@@ -13,15 +13,10 @@ type API struct {
 	RelativePath string
 	Method       string
 
-	Params    []*Params
+	BodyParams *Object
+	PathParams *Object
+	QueryParams *Object
 	ParamsRaw openapi3.Parameters // 用来debug
-}
-
-type Params struct {
-	In          string // 参数的传递方式
-	Name        string
-	Description string
-	Props       Prop
 }
 
 /*
@@ -44,6 +39,14 @@ obj = find(req,man.id)
 for case range idsInput:
 obj = case.Value
 */
+
+func NewAPI() *API {
+	return &API{
+		BodyParams: NewObject(),
+		PathParams: NewObject(),
+		QueryParams: NewObject(),
+	}
+}
 
 // Parse ... apiFile 相对路径
 func Parse(apiFile string) []*API {
@@ -93,7 +96,8 @@ func GenerateAPI(method string, operation *openapi3.Operation) *API {
 	if operation == nil {
 		return nil
 	}
-	api := &API{Method: method}
+	api := NewAPI()
+	api.Method = method
 	api.OperationHandler(operation)
 	return api
 }
@@ -103,33 +107,48 @@ func (a *API) OperationHandler(item *openapi3.Operation) {
 
 	// 处理一个个param
 	for _, paramRef := range item.Parameters {
-		parameters := ParameterRefHandler(paramRef)
-		a.Params = append(a.Params, parameters)
+		a.ParameterRefHandler(paramRef)
 	}
 }
 
-func ParameterRefHandler(ref *openapi3.ParameterRef) *Params {
+func (a *API)ParameterRefHandler(ref *openapi3.ParameterRef)  {
 	if ref.Value == nil {
-		return nil
+		return
 	}
 	rawParameter := ref.Value
 
-	parameter := &Params{
-		In:          rawParameter.In,
-		Name:        rawParameter.Name,
-		Description: rawParameter.Description,
+	setPropInfo := func(p *Object) {
+		p.In = rawParameter.In
+		p.Description = rawParameter.Description
 	}
 
-	if rawParameter.In == "body" {
-		parameter.Props = SchemaRefHandler(rawParameter.Schema)
-		return parameter
+	switch rawParameter.In {
+	case "body":
+		setPropInfo(a.BodyParams)
+		newObj := SchemaRefHandler(rawParameter.Schema).(*Object)
+		for k, v := range newObj.Props {
+			a.BodyParams.Props[k] = v
+		}
+	case "query":
+		setPropInfo(a.QueryParams)
+		newParamName := rawParameter.Name
+		newParam := ExtensionPropsHandler(rawParameter.ExtensionProps)
+		if _, isObject := newParam.(*Object) ;isObject{
+			panic("这宗情况需要处理一下，结构体参数出现在这两种类型中")
+		}
+		a.QueryParams.Props[newParamName] = newParam
+	case "path":
+		setPropInfo(a.PathParams)
+		newParamName := rawParameter.Name
+		newParam := ExtensionPropsHandler(rawParameter.ExtensionProps)
+		if _, isObject := newParam.(*Object) ;isObject{
+			panic("这宗情况需要处理一下，结构体参数出现在这两种类型中")
+		}
+		a.PathParams.Props[newParamName] = newParam
+	default:
+		log.Printf("%+v\n", rawParameter)
+		panic("unexpect case")
 	}
-	if rawParameter.In == "query" || rawParameter.In == "path" {
-		parameter.Props = ExtensionPropsHandler(rawParameter.ExtensionProps)
-		return parameter
-	}
-	log.Printf("%+v\n", rawParameter)
-	panic("unexpect case")
 }
 
 func ExtensionPropsHandler(extendProps openapi3.ExtensionProps) Prop {
@@ -147,7 +166,30 @@ func ExtensionPropsHandler(extendProps openapi3.ExtensionProps) Prop {
 		panic(err)
 	}
 	t := strings.Trim(string(typeStringBytes), "\"")
-	return CreatePropWithType(t)
+	type Items struct {
+		Type string `json:"type"`
+	}
+
+	switch t {
+	case String_T:
+		return NewString("")
+	case Array_T:
+		items := Items{}
+		msg := extendProps.Extensions["items"].(json.RawMessage)
+		b, _ := msg.MarshalJSON()
+		json.Unmarshal(b, &items)
+		arr :=  NewArray()
+		arr.AddProp()
+	case Object_T:
+		panic("额外参数的object需要被处理")
+		return NewObject()
+	case Int_T:
+		return NewInt(0)
+	case Bool_T:
+		return NewBool(false)
+	default:
+		panic("not type:" + t)
+	}
 }
 
 func SchemaRefHandler(ref *openapi3.SchemaRef) Prop {
@@ -189,18 +231,4 @@ func SchemaRefHandler(ref *openapi3.SchemaRef) Prop {
 }
 
 func CreatePropWithType(t string) Prop {
-	switch t {
-	case String_T:
-		return NewString("")
-	case Array_T:
-		return NewArray()
-	case Object_T:
-		return NewObject()
-	case Int_T:
-		return NewInt(0)
-	case Bool_T:
-		return NewBool(false)
-	default:
-		panic("not type:" + t)
-	}
 }

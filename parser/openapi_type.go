@@ -35,31 +35,31 @@ type BasicProp struct {
 	Value       interface{}
 }
 
-func (b BasicProp) GetIn() string {
+func (b *BasicProp) GetIn() string {
 	return b.In
 }
 
-func (b BasicProp) SetValue(value interface{}) {
+func (b *BasicProp) SetValue(value interface{}) {
 	b.Value = value
 }
 
-func (b BasicProp) GetType() string {
+func (b *BasicProp) GetType() string {
 	return b.Type
 }
 
-func (b BasicProp) GetName() string {
+func (b *BasicProp) GetName() string {
 	return b.Name
 }
 
-func (b BasicProp) GetProp(name string) (Prop, error) {
+func (b *BasicProp) GetProp(name string) (Prop, error) {
 	return nil, errors.New(`no subProperty for this type`)
 }
 
-func (b BasicProp) DefaultValue() interface{} {
+func (b *BasicProp) DefaultValue() interface{} {
 	panic("must be over write")
 }
 
-func (b BasicProp) MarshalJSON() ([]byte, error) {
+func (b *BasicProp) MarshalJSON() ([]byte, error) {
 	return json.Marshal(b.Value)
 }
 
@@ -76,10 +76,10 @@ func (o *Object) MarshalJSON() ([]byte, error) {
 	return json.Marshal(o.Props)
 }
 
-func (o *Object) Get(name string) (Prop, error) {
+func (o *Object) GetProp(name string) (Prop, error) {
 	prop, exists := o.Props[name]
 	if !exists {
-		return nil, errors.New(fmt.Sprintf(`property %s not found`, name))
+		return nil, errors.New(fmt.Sprintf(`property %s not found in object type`, name))
 	}
 	return prop, nil
 }
@@ -116,7 +116,7 @@ func (a *Array) Get(name string) (Prop, error) {
 }
 
 func NewArray() *Array {
-	return &Array{BasicProp: NewBasicProp()}
+	return &Array{BasicProp: NewBasicProp(), PropsArr: make([]Prop, 0)}
 }
 
 type String struct {

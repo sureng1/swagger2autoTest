@@ -82,25 +82,13 @@ func api2Request(api *parser.API, testCase *case_loader.Case) Request {
 		return string(b)
 	}
 
-	body := map[string]interface{}{}
-	path := map[string]interface{}{}
+	req.Params = toString(api.BodyParams)
+	req.UrlInput = toString(api.PathParams)
+
 	query := url.Values{}
-	for _, param := range api.Params {
-		switch param.In {
-		case "body":
-			body[param.Name] = param.Props
-		case "path":
-			path[param.Name] = param.Props
-		case "query":
-			query.Add(param.Name, toString(param.Props))
-		default:
-			panic("type unexpected" + param.In)
-		}
+	for queryName, queryValue := range api.QueryParams.Props {
+		query.Add(queryName, toString(queryValue))
 	}
-
-	req.Params = toString(body)
-	req.UrlInput = toString(path)
-
 	u := url.URL{}
 	u.Path = api.RelativePath
 	u.RawQuery = query.Encode()
@@ -110,25 +98,28 @@ func api2Request(api *parser.API, testCase *case_loader.Case) Request {
 }
 
 func generateRequestCase(api *parser.API, testCaseRef *case_loader.TestCase) error {
-	for _, param := range api.Params {
-		for param2Test, paramCase := range testCaseRef.Parameters {
-			parser.SetProp(param.Props, param2Test, paramCase.Default)
+		for param2Test, paramCase := range testCaseRef.Parameters { // 尝试负值默认值给三种类型的参数
+			parser.SetProp(api.BodyParams, param2Test, paramCase.Default)
+			parser.SetProp(api.PathParams, param2Test, paramCase.Default)
+			parser.SetProp(api.QueryParams, param2Test, paramCase.Default)
 		}
-	}
 
 	templateList := make([]Request, 0)
 	for param2Test, paramCase := range testCaseRef.Parameters {
 		for _, testCase := range paramCase.TestCases {
 			for _, testValue := range testCase.ValueList {
-				for _, param := range api.Params {
-					old, err := parser.SetPropAndGetOld(param.Props, param2Test, testValue)
+				trySetAndGenerate := func (p parser.Prop) {
+					old, err := parser.SetPropAndGetOld(p, param2Test, testValue)
 					if err != nil {
-						continue
+						return
 					}
 					req := api2Request(api, testCase)
 					templateList = append(templateList, req)
-					parser.SetProp(param.Props, param2Test, old)
+					parser.SetProp(p, param2Test, old)
 				}
+				trySetAndGenerate(api.BodyParams)
+				trySetAndGenerate(api.QueryParams)
+				trySetAndGenerate(api.PathParams)
 			}
 		}
 	}
