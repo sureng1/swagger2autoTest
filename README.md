@@ -1,3 +1,8 @@
+# get start
+到根目录
+go run main.go
+
+
 # swagger2autoTest
 
 现状：

@@ -3,20 +3,21 @@ package parser
 import (
 	"context"
 	"encoding/json"
-	"github.com/getkin/kin-openapi/openapi3"
 	"log"
 	"net/http"
 	"strings"
+
+	"github.com/getkin/kin-openapi/openapi3"
 )
 
 type API struct {
 	RelativePath string
 	Method       string
 
-	BodyParams *Object
-	PathParams *Object
+	BodyParams  *Object
+	PathParams  *Object
 	QueryParams *Object
-	ParamsRaw openapi3.Parameters // 用来debug
+	ParamsRaw   openapi3.Parameters // 用来debug
 }
 
 /*
@@ -42,8 +43,8 @@ obj = case.Value
 
 func NewAPI() *API {
 	return &API{
-		BodyParams: NewObject(),
-		PathParams: NewObject(),
+		BodyParams:  NewObject(),
+		PathParams:  NewObject(),
 		QueryParams: NewObject(),
 	}
 }
@@ -111,7 +112,7 @@ func (a *API) OperationHandler(item *openapi3.Operation) {
 	}
 }
 
-func (a *API)ParameterRefHandler(ref *openapi3.ParameterRef)  {
+func (a *API) ParameterRefHandler(ref *openapi3.ParameterRef) {
 	if ref.Value == nil {
 		return
 	}
@@ -133,7 +134,7 @@ func (a *API)ParameterRefHandler(ref *openapi3.ParameterRef)  {
 		setPropInfo(a.QueryParams)
 		newParamName := rawParameter.Name
 		newParam := ExtensionPropsHandler(rawParameter.ExtensionProps)
-		if _, isObject := newParam.(*Object) ;isObject{
+		if _, isObject := newParam.(*Object); isObject {
 			panic("这宗情况需要处理一下，结构体参数出现在这两种类型中")
 		}
 		a.QueryParams.Props[newParamName] = newParam
@@ -141,7 +142,7 @@ func (a *API)ParameterRefHandler(ref *openapi3.ParameterRef)  {
 		setPropInfo(a.PathParams)
 		newParamName := rawParameter.Name
 		newParam := ExtensionPropsHandler(rawParameter.ExtensionProps)
-		if _, isObject := newParam.(*Object) ;isObject{
+		if _, isObject := newParam.(*Object); isObject {
 			panic("这宗情况需要处理一下，结构体参数出现在这两种类型中")
 		}
 		a.PathParams.Props[newParamName] = newParam
@@ -178,8 +179,20 @@ func ExtensionPropsHandler(extendProps openapi3.ExtensionProps) Prop {
 		msg := extendProps.Extensions["items"].(json.RawMessage)
 		b, _ := msg.MarshalJSON()
 		json.Unmarshal(b, &items)
-		arr :=  NewArray()
-		arr.AddProp()
+		arr := NewArray()
+		var element Prop
+		switch items.Type {
+		case String_T:
+			element = NewString("")
+		case Int_T:
+			element = NewInt(0)
+		case Bool_T:
+			element = NewBool(false)
+		default:
+			panic("not type:" + t)
+		}
+		arr.AddProp(element)
+		return arr
 	case Object_T:
 		panic("额外参数的object需要被处理")
 		return NewObject()
@@ -228,7 +241,4 @@ func SchemaRefHandler(ref *openapi3.SchemaRef) Prop {
 	default:
 		panic(`type not support yet`)
 	}
-}
-
-func CreatePropWithType(t string) Prop {
 }

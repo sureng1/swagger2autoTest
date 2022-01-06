@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"go.uber.org/zap"
 	"producerPy/deepcopy"
 	"strings"
+
+	"go.uber.org/zap"
 )
 
 /*
@@ -52,11 +53,6 @@ func overwrite(propInter Prop, value interface{}) error {
 		err := json.Unmarshal([]byte(s), &immediateChildren)
 		return immediateChildren, err
 	}
-	getArrayValue := func(s string) ([]interface{}, error) {
-		firstLayer := make([]interface{}, 0)
-		err := json.Unmarshal([]byte(s), &firstLayer)
-		return firstLayer, err
-	}
 	switch currentProp := propInter.(type) {
 	case *Object:
 		v, ok := value.(string)
@@ -80,52 +76,37 @@ func overwrite(propInter Prop, value interface{}) error {
 		}
 		return nil
 	case *Array:
-		v, ok := value.(string)
-		if !ok {
-			return errors.New(fmt.Sprintf("object string required, but:%s", value))
-		}
-		children, err := getArrayValue(v)
-		if err != nil {
-			zap.L().Error(`get array value failed`, zap.Error(err))
-			return err
-		}
-		newArray := make([]Prop, 0, len(children)) // 测试用例里面数组元素个数可能超过1个，而api解析出来的Array类型默认只有一个Prop，所以需要重新构造Prop，并且重写它们
-		for _, child := range children {
-			newProp := deepcopy.Copy(currentProp.PropsArr[0]).(Prop)
-			if err := overwrite(newProp, child); err != nil {
-				return err
+		switch v := value.(type) {
+		case string:
+			currentProp.PropsArr[0] = NewString(v)
+		case []interface{}:
+			children := v
+			newArray := make([]Prop, 0, len(children)) // 测试用例里面数组元素个数可能超过1个，而api解析出来的Array类型默认只有一个Prop，所以需要重新构造Prop，并且重写它们
+			for _, child := range children {
+				newProp := deepcopy.Copy(currentProp.PropsArr[0]).(Prop)
+				if err := overwrite(newProp, child); err != nil {
+					return err
+				}
+				newArray = append(newArray, newProp)
 			}
-			newArray = append(newArray, newProp)
+			currentProp.PropsArr = newArray
+		default:
+			otherProp := NewBasicProp()
+			otherProp.SetValue(v)
+			currentProp.PropsArr[0] = otherProp
 		}
-		currentProp.PropsArr = newArray
 		return nil
 	case *String:
-		v, ok := value.(string)
-		if !ok {
-			return errors.New(fmt.Sprintf("string required, but:%s", value))
-		}
-		currentProp.SetValue(v)
+		currentProp.SetValue(value)
 		return nil
 	case *Bool:
-		v, ok := value.(bool)
-		if !ok {
-			return errors.New(fmt.Sprintf("boolean required, but:%s", value))
-		}
-		currentProp.SetValue(v)
+		currentProp.SetValue(value)
 		return nil
 	case *Int:
-		v, ok := value.(int)
-		if !ok {
-			return errors.New(fmt.Sprintf("int required, but:%s", value))
-		}
-		currentProp.SetValue(v)
+		currentProp.SetValue(value)
 		return nil
 	case *Number:
-		v, ok := value.(float64)
-		if !ok {
-			return errors.New(fmt.Sprintf("folat required, but:%s", value))
-		}
-		currentProp.SetValue(v)
+		currentProp.SetValue(value)
 		return nil
 	default:
 		panic(`type not support yet`)

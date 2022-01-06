@@ -13,13 +13,20 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+var (
+	caseDir   string = "case_loader/cases"
+	apiFile   string = "parser/fcst-platform.json"
+	outPutDir string = "cases_generated/"
+)
+
 func init() {
 	zap.ReplaceGlobals(zap.NewExample())
 }
 
 func main() {
-	testCases := case_loader.ReadCasesFiles("case_loader/cases")
-	apiList := parser.Parse("parser/fcst-platform.json")
+	zap.L().Info(`run`)
+	testCases := case_loader.ReadCasesFiles(caseDir) // 测试用例 yaml的目录
+	apiList := parser.Parse(apiFile)                 // api文件，具体到文件
 	for name, testCase := range testCases {
 		targetApi := FindApi(apiList, testCase)
 		if targetApi == nil {
@@ -87,7 +94,13 @@ func api2Request(api *parser.API, testCase *case_loader.Case) Request {
 
 	query := url.Values{}
 	for queryName, queryValue := range api.QueryParams.Props {
-		query.Add(queryName, toString(queryValue))
+		if arr, isArr := queryValue.(*parser.Array); isArr {
+			for _, ele := range arr.PropsArr {
+				query.Add(queryName, toString(ele))
+			}
+		} else {
+			query.Add(queryName, toString(queryValue))
+		}
 	}
 	u := url.URL{}
 	u.Path = api.RelativePath
@@ -98,17 +111,17 @@ func api2Request(api *parser.API, testCase *case_loader.Case) Request {
 }
 
 func generateRequestCase(api *parser.API, testCaseRef *case_loader.TestCase) error {
-		for param2Test, paramCase := range testCaseRef.Parameters { // 尝试负值默认值给三种类型的参数
-			parser.SetProp(api.BodyParams, param2Test, paramCase.Default)
-			parser.SetProp(api.PathParams, param2Test, paramCase.Default)
-			parser.SetProp(api.QueryParams, param2Test, paramCase.Default)
-		}
+	for param2Test, paramCase := range testCaseRef.Parameters { // 尝试负值默认值给三种类型的参数
+		parser.SetProp(api.BodyParams, param2Test, paramCase.Default)
+		parser.SetProp(api.PathParams, param2Test, paramCase.Default)
+		parser.SetProp(api.QueryParams, param2Test, paramCase.Default)
+	}
 
 	templateList := make([]Request, 0)
 	for param2Test, paramCase := range testCaseRef.Parameters {
 		for _, testCase := range paramCase.TestCases {
 			for _, testValue := range testCase.ValueList {
-				trySetAndGenerate := func (p parser.Prop) {
+				trySetAndGenerate := func(p parser.Prop) {
 					old, err := parser.SetPropAndGetOld(p, param2Test, testValue)
 					if err != nil {
 						return
@@ -128,7 +141,7 @@ func generateRequestCase(api *parser.API, testCaseRef *case_loader.TestCase) err
 	if err != nil {
 		return err
 	}
-	f, err := os.Create("cases_generated/" + strings.ReplaceAll(api.RelativePath, "/", "_") + ".yaml")
+	f, err := os.Create(outPutDir + api.Method + "_" + strings.ReplaceAll(api.RelativePath, "/", "_") + ".yaml")
 	if err != nil {
 		return err
 	}

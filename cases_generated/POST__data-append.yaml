@@ -1,0 +1,36 @@
+- api:
+    alias_name: todo is what?
+    method: POST
+    sub_url: /data-append
+  case: case200
+  body: {}
+  level: P1
+  url_input: '{}'
+  params: '{"behavior":"n2","campaignID":0,"dataCategory":"hi","operation":"","processInput":{"account":["123"],"item":["hi"],"phoneIndex":0,"promotion":["h2"],"region":"","seller":[""],"shop":[""],"total":0},"processType":"","region":"","reqID":""}'
+  status_code: 200
+  business_code: 2002
+  reason: ok(todo)
+- api:
+    alias_name: todo is what?
+    method: POST
+    sub_url: /data-append
+  case: case200
+  body: {}
+  level: P1
+  url_input: '{}'
+  params: '{"behavior":"123n","campaignID":0,"dataCategory":"hi","operation":"","processInput":{"account":["123"],"item":["hi"],"phoneIndex":0,"promotion":["h2"],"region":"","seller":[""],"shop":[""],"total":0},"processType":"","region":"","reqID":""}'
+  status_code: 200
+  business_code: 2002
+  reason: ok(todo)
+- api:
+    alias_name: todo is what?
+    method: POST
+    sub_url: /data-append
+  case: case200
+  body: {}
+  level: P1
+  url_input: '{}'
+  params: '{"behavior":33,"campaignID":0,"dataCategory":"hi","operation":"","processInput":{"account":["123"],"item":["hi"],"phoneIndex":0,"promotion":["h2"],"region":"","seller":[""],"shop":[""],"total":0},"processType":"","region":"","reqID":""}'
+  status_code: 200
+  business_code: 2002
+  reason: ok(todo)
